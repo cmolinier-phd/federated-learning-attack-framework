@@ -1,6 +1,6 @@
 #federated-learning-attack-framework/task.py
 
-"""Provide Model's class and all model manipulation function.
+"""Provide model class and all manipulation function.
 
 This module allows the user to get the model to train and perform actions on it.
 
