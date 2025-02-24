@@ -1,17 +1,7 @@
-# Welcome to MkDocs
+# PredaFL - Generic attack framework for federated learning
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+This site contains the project documentation for the `PredaFL` project which is a generic attacking framework on federated learning built on top of flower framework.
 
-## Commands
+## Table Of Contents
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+1. [Reference](reference/federated-learning-attack-framework.md)

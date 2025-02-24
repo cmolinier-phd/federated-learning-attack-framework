@@ -1,4 +1,4 @@
-site_name: PredaFL - Generic framework for attacks on federated learning
+site_name: PredaFL - Generic attack framework for federated learning
 
 theme:
   name: "material"
@@ -18,9 +18,23 @@ theme:
       toggle:
         icon: material/weather-night
         name: Switch to light mode
+  
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.indexes
+    - navigation.top
 
   logo: assets/logo.png
   favicon: assets/logo.png
+
+markdown_extensions: 
+  - attr_list
+  - md_in_html
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 plugins:
   - mkdocstrings:
@@ -35,4 +49,10 @@ plugins:
 nav:
   - PredaFL Docs: index.md
   - Reference:
-    - Task: reference/task.md
+    - federated learning attack framework: reference/federated-learning-attack-framework.md
+    - Utils:
+      - reference/utils/index.md
+      - Task: reference/utils/task.md
+      - Data: reference/utils/data.md
+    - Client app: reference/client.md
+    - Server app: reference/server.md
