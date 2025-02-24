@@ -9,23 +9,25 @@
       
       
       
-        <link rel="prev" href="../..">
+        <link rel="prev" href="../">
       
       
+        <link rel="next" href="../data/">
       
-      <link rel="icon" href="../../assets/logo.png">
+      
+      <link rel="icon" href="../../../assets/logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.5">
     
     
       
-        <title>Task - PredaFL - Generic framework for attacks on federated learning</title>
+        <title>Task - PredaFL - Generic attack framework for federated learning</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.8608ea7d.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8608ea7d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -44,9 +46,9 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../../../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -86,11 +88,11 @@
 
   
 
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../.." title="PredaFL - Generic framework for attacks on federated learning" class="md-header__button md-logo" aria-label="PredaFL - Generic framework for attacks on federated learning" data-md-component="logo">
+    <a href="../../.." title="PredaFL - Generic attack framework for federated learning" class="md-header__button md-logo" aria-label="PredaFL - Generic attack framework for federated learning" data-md-component="logo">
       
-  <img src="../../assets/logo.png" alt="logo">
+  <img src="../../../assets/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -101,7 +103,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            PredaFL - Generic framework for attacks on federated learning
+            PredaFL - Generic attack framework for federated learning
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -148,13 +150,61 @@
     
   </nav>
   
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  PredaFL Docs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../federated-learning-attack-framework/" class="md-tabs__link">
+          
+  
+    
+  
+  Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
-        
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -168,15 +218,17 @@
                     
 
 
+  
 
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../.." title="PredaFL - Generic framework for attacks on federated learning" class="md-nav__button md-logo" aria-label="PredaFL - Generic framework for attacks on federated learning" data-md-component="logo">
+    <a href="../../.." title="PredaFL - Generic attack framework for federated learning" class="md-nav__button md-logo" aria-label="PredaFL - Generic attack framework for federated learning" data-md-component="logo">
       
-  <img src="../../assets/logo.png" alt="logo">
+  <img src="../../../assets/logo.png" alt="logo">
 
     </a>
-    PredaFL - Generic framework for attacks on federated learning
+    PredaFL - Generic attack framework for federated learning
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -188,7 +240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -212,16 +264,32 @@
   
     
     
+      
+        
+      
+        
+      
+        
+      
+        
+      
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   <span class="md-ellipsis">
@@ -239,6 +307,89 @@
             Reference
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../federated-learning-attack-framework/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    federated learning attack framework
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  <span class="md-ellipsis">
+    Utils
+    
+  </span>
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Utils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
             
               
                 
@@ -295,7 +446,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task" class="md-nav__link">
     <span class="md-ellipsis">
       task
     </span>
@@ -304,7 +455,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.Net" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.Net" class="md-nav__link">
     <span class="md-ellipsis">
       Net
     </span>
@@ -314,7 +465,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.Net.forward" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.Net.forward" class="md-nav__link">
     <span class="md-ellipsis">
       forward
     </span>
@@ -328,16 +479,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.load_data" class="md-nav__link">
-    <span class="md-ellipsis">
-      load_data
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.train" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.train" class="md-nav__link">
     <span class="md-ellipsis">
       train
     </span>
@@ -346,7 +488,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.test" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.test" class="md-nav__link">
     <span class="md-ellipsis">
       test
     </span>
@@ -355,7 +497,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.get_weights" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.get_weights" class="md-nav__link">
     <span class="md-ellipsis">
       get_weights
     </span>
@@ -364,7 +506,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.set_weights" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.set_weights" class="md-nav__link">
     <span class="md-ellipsis">
       set_weights
     </span>
@@ -376,6 +518,80 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../client/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Client app
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../server/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server app
+    
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -415,7 +631,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task" class="md-nav__link">
     <span class="md-ellipsis">
       task
     </span>
@@ -424,7 +640,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.Net" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.Net" class="md-nav__link">
     <span class="md-ellipsis">
       Net
     </span>
@@ -434,7 +650,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.Net.forward" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.Net.forward" class="md-nav__link">
     <span class="md-ellipsis">
       forward
     </span>
@@ -448,16 +664,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.load_data" class="md-nav__link">
-    <span class="md-ellipsis">
-      load_data
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.train" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.train" class="md-nav__link">
     <span class="md-ellipsis">
       train
     </span>
@@ -466,7 +673,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.test" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.test" class="md-nav__link">
     <span class="md-ellipsis">
       test
     </span>
@@ -475,7 +682,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.get_weights" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.get_weights" class="md-nav__link">
     <span class="md-ellipsis">
       get_weights
     </span>
@@ -484,7 +691,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#federated_learning_attack_framework.task.set_weights" class="md-nav__link">
+  <a href="#federated_learning_attack_framework.utils.task.set_weights" class="md-nav__link">
     <span class="md-ellipsis">
       set_weights
     </span>
@@ -510,7 +717,7 @@
 
 <h1 id="task">Task</h1>
 <hr />
-<p>See sources on <a href="https://github.com/cmolinier-phd/federated-learning-attack-framework/blob/main/federated_learning_attack_framework/task.py">github</a>.</p>
+<p>See sources on <a href="https://github.com/cmolinier-phd/federated-learning-attack-framework/blob/main/federated_learning_attack_framework/utils/task.py">github</a>.</p>
 <hr />
 
 
@@ -518,7 +725,7 @@
 
 
 
-<a id="federated_learning_attack_framework.task"></a>
+<a id="federated_learning_attack_framework.utils.task"></a>
     <div class="doc doc-contents first">
 
         <p>Provide model class and all manipulation function.</p>
@@ -552,7 +759,7 @@
 
 
 
-<h2 id="federated_learning_attack_framework.task.Net" class="doc doc-heading">
+<h2 id="federated_learning_attack_framework.utils.task.Net" class="doc doc-heading">
             <span class="doc doc-object-name doc-class-name">Net</span>
 
 
@@ -601,7 +808,7 @@
 <div class="doc doc-object doc-function">
 
 
-<h3 id="federated_learning_attack_framework.task.Net.forward" class="doc doc-heading">
+<h3 id="federated_learning_attack_framework.utils.task.Net.forward" class="doc doc-heading">
             <span class="doc doc-object-name doc-function-name">forward</span>
 
 
@@ -671,7 +878,7 @@
             </td>
             <td>
               <div class="doc-md-description">
-                <p>A tensor representing softmax activation output of the model given x.</p>
+                <p>A tensor representing the softmax activation of the model's output layer given x.</p>
               </div>
             </td>
           </tr>
@@ -694,26 +901,7 @@
 <div class="doc doc-object doc-function">
 
 
-<h2 id="federated_learning_attack_framework.task.load_data" class="doc doc-heading">
-            <span class="doc doc-object-name doc-function-name">load_data</span>
-
-
-</h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">load_data</span><span class="p">(</span><span class="n">partition_id</span><span class="p">,</span> <span class="n">num_partitions</span><span class="p">)</span>
-</code></pre></div>
-
-    <div class="doc doc-contents ">
-
-        <p>Load partition CIFAR10 data.</p>
-
-    </div>
-
-</div>
-
-<div class="doc doc-object doc-function">
-
-
-<h2 id="federated_learning_attack_framework.task.train" class="doc doc-heading">
+<h2 id="federated_learning_attack_framework.utils.task.train" class="doc doc-heading">
             <span class="doc doc-object-name doc-function-name">train</span>
 
 
@@ -752,7 +940,7 @@
                 <code>net</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="federated_learning_attack_framework.task.Net" href="#federated_learning_attack_framework.task.Net">Net</a></code>
+                  <code><a class="autorefs autorefs-internal" title="federated_learning_attack_framework.utils.task.Net" href="#federated_learning_attack_framework.utils.task.Net">Net</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -842,7 +1030,7 @@
 <div class="doc doc-object doc-function">
 
 
-<h2 id="federated_learning_attack_framework.task.test" class="doc doc-heading">
+<h2 id="federated_learning_attack_framework.utils.task.test" class="doc doc-heading">
             <span class="doc doc-object-name doc-function-name">test</span>
 
 
@@ -871,7 +1059,7 @@
                 <code>net</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="federated_learning_attack_framework.task.Net" href="#federated_learning_attack_framework.task.Net">Net</a></code>
+                  <code><a class="autorefs autorefs-internal" title="federated_learning_attack_framework.utils.task.Net" href="#federated_learning_attack_framework.utils.task.Net">Net</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -946,7 +1134,7 @@
 <div class="doc doc-object doc-function">
 
 
-<h2 id="federated_learning_attack_framework.task.get_weights" class="doc doc-heading">
+<h2 id="federated_learning_attack_framework.utils.task.get_weights" class="doc doc-heading">
             <span class="doc doc-object-name doc-function-name">get_weights</span>
 
 
@@ -975,7 +1163,7 @@
                 <code>net</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="federated_learning_attack_framework.task.Net" href="#federated_learning_attack_framework.task.Net">Net</a></code>
+                  <code><a class="autorefs autorefs-internal" title="federated_learning_attack_framework.utils.task.Net" href="#federated_learning_attack_framework.utils.task.Net">Net</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1019,7 +1207,7 @@
 <div class="doc doc-object doc-function">
 
 
-<h2 id="federated_learning_attack_framework.task.set_weights" class="doc doc-heading">
+<h2 id="federated_learning_attack_framework.utils.task.set_weights" class="doc doc-heading">
             <span class="doc doc-object-name doc-function-name">set_weights</span>
 
 
@@ -1048,7 +1236,7 @@
                 <code>net</code>
             </td>
             <td>
-                  <code><a class="autorefs autorefs-internal" title="federated_learning_attack_framework.task.Net" href="#federated_learning_attack_framework.task.Net">Net</a></code>
+                  <code><a class="autorefs autorefs-internal" title="federated_learning_attack_framework.utils.task.Net" href="#federated_learning_attack_framework.utils.task.Net">Net</a></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1109,6 +1297,12 @@
 <script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
         </div>
         
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
       </main>
       
         <footer class="md-footer">
@@ -1135,10 +1329,10 @@
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.indexes", "navigation.top"], "search": "../../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.f1b6f286.min.js"></script>
       
     
   </body>
