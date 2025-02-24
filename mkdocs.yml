@@ -1,0 +1,36 @@
+site_name: PredaFL - Generic framework for attacks on federated learning
+
+theme:
+  name: "material"
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue 
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue 
+      toggle:
+        icon: material/weather-night
+        name: Switch to light mode
+
+  logo: assets/logo.png
+  favicon: assets/logo.png
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            members_order: source
+            group_by_category: true
+            show_source: false
+
+nav:
+  - PredaFL Docs: index.md
+  - reference.md
