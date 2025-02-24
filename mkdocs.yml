@@ -30,7 +30,9 @@ plugins:
             members_order: source
             group_by_category: true
             show_source: false
+            separate_signature: true
 
 nav:
   - PredaFL Docs: index.md
-  - reference.md
+  - Reference:
+    - Task: reference/task.md

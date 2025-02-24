@@ -1,4 +1,17 @@
-"""federated-learning-attack-framework: A Flower / PyTorch app."""
+#federated-learning-attack-framework/task.py
+
+"""Provide Model's class and all model manipulation function.
+
+This module allows the user to get the model to train and perform actions on it.
+
+The module contains the following functions:
+
+- `Net()` - The model's class.
+- `train(net, trainloader, epochs, device)` - Train the model.
+- `test(net, testloader, device)` - Test the model.
+- `get_weights(net)` - Get the model state dict in a list.
+- `set_weights(net, parameters)` - Set the model state dict from a given list.
+"""
 
 from collections import OrderedDict
 
@@ -6,10 +19,12 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from torch.utils.data import DataLoader
+
+from torchvision.transforms import Compose, Normalize, ToTensor
+
 from flwr_datasets import FederatedDataset
 from flwr_datasets.partitioner import IidPartitioner
-from torch.utils.data import DataLoader
-from torchvision.transforms import Compose, Normalize, ToTensor
 
 
 class Net(nn.Module):
@@ -23,18 +38,18 @@ class Net(nn.Module):
         ------------------------------------------------
             Layer (type)               Output Shape     
         ================================================
-            Conv2d-1                 [-1, 6, 28, 28]    
-            MaxPool2d-2              [-1, 6, 14, 14]    
-            Conv2d-3                [-1, 16, 10, 10]    
-            MaxPool2d-4               [-1, 16, 5, 5]    
-            Linear-5                       [-1, 120]    
-            Linear-6                        [-1, 84]    
-            Linear-7                        [-1, 10]    
+            Conv2d                   [-1, 6, 28, 28]    
+            MaxPool2d                [-1, 6, 14, 14]    
+            Conv2d                  [-1, 16, 10, 10]    
+            MaxPool2d                 [-1, 16, 5, 5]    
+            Linear                         [-1, 120]    
+            Linear                          [-1, 84]    
+            Linear                          [-1, 10]    
         ================================================
 
     """
 
-    def __init__(self):
+    def __init__(self) -> nn.Module:
         super(Net, self).__init__()
         self.conv1 = nn.Conv2d(3, 6, 5)
         self.pool = nn.MaxPool2d(2, 2)
@@ -103,30 +118,55 @@ def load_data(partition_id: int, num_partitions: int):
     return trainloader, testloader
 
 
-def train(net: nn.Module, trainloader: DataLoader, epochs: int, device: torch.device) -> float:
+def train(net: Net, trainloader: DataLoader, epochs: int, device: torch.device) -> float:
     """Train the model on the training set.
+
+    Training loop :
+
+        1. Get images and labels from batch
+        2. Compute model ouptut on image batch
+        3. Compute output loss with label
+        4. Make backpropagation and optimizer step
+
+    Fixed parameters :
+
+        - Optimizer: Amad, lr=0.01
+        - Loss : CrossEntropyLoss
     
     Args:
         net: The model to train
         trainloader: The dataloader to train the model on
         epochs : The number of training epochs
-        device : The device to use
+        device : The device to use (cpu or cuda)
 
     Returns:
         The average loss during the training.
     """
-    net.to(device)  # move model to GPU if available
+    # Move model to device
+    net.to(device)
+
+    # Setup loss function and optimizer
     criterion = torch.nn.CrossEntropyLoss().to(device)
     optimizer = torch.optim.Adam(net.parameters(), lr=0.01)
+
+    # Switch model to training mode
     net.train()
+
     running_loss = 0.0
+
+    # Main loop
     for _ in range(epochs):
+        # run over batches
         for batch in trainloader:
+            # Extract images and label
             images = batch["img"]
             labels = batch["label"]
+            # Reset optimizer gradient
             optimizer.zero_grad()
+            # Compute loss and back propagate
             loss = criterion(net(images.to(device)), labels.to(device))
             loss.backward()
+            # Make an optimization step
             optimizer.step()
             running_loss += loss.item()
 
@@ -134,7 +174,7 @@ def train(net: nn.Module, trainloader: DataLoader, epochs: int, device: torch.de
     return avg_trainloss
 
 
-def test(net, testloader, device):
+def test(net: Net, testloader: DataLoader, device: torch.device) -> tuple[float, float]:
     """Test the model on the test set with a single forward pass.
     
     Args:
@@ -145,26 +185,39 @@ def test(net, testloader, device):
     Returns:
         The loss and the accuracy on the test dataloader.
     """
+    # Move model to device
     net.to(device)
+    
+    # Setup loss functiona
     criterion = torch.nn.CrossEntropyLoss()
+
     correct, loss = 0, 0.0
+
+    # No gradient computation (testing, should not affect model weights)
     with torch.no_grad():
+        # Run over batches
         for batch in testloader:
+            # Extract images and label
             images = batch["img"].to(device)
             labels = batch["label"].to(device)
+            # Compute model output and loss
             outputs = net(images)
             loss += criterion(outputs, labels).item()
+            # Compute batch score
             correct += (torch.max(outputs.data, 1)[1] == labels).sum().item()
+
+    # Copute global accracy and loss 
     accuracy = correct / len(testloader.dataset)
     loss = loss / len(testloader)
+
     return loss, accuracy
 
 
-def get_weights(net: nn.Module)->list:
+def get_weights(net: Net) -> list[float]:
     """Get weights from model.
     
     Args:
-        net: The model whiwh we want the wieghts
+        net: The model which we want to get the weights
 
     Returns:
         The weights in a list of layers param
@@ -172,8 +225,16 @@ def get_weights(net: nn.Module)->list:
     return [val.cpu().numpy() for _, val in net.state_dict().items()]
 
 
-def set_weights(net, parameters):
-    "Set weights"
+def set_weights(net: Net, parameters: list[float]) -> None:
+    """Set mode weights from param list.
+    
+    Args:
+        net: The model which we want to set the wieghts
+        parameters: The new state dict in a list
+    """
+    # Bind keys and values
     params_dict = zip(net.state_dict().keys(), parameters)
+    # transform in a dict
     state_dict = OrderedDict({k: torch.tensor(v) for k, v in params_dict})
+    # Replace weigths
     net.load_state_dict(state_dict, strict=True)
