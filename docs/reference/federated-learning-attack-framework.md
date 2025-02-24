@@ -4,7 +4,7 @@
 
 <div class="grid cards" markdown>
 
--   :fontawesome-solid-server:{ .lg .middle } __Client__
+-   :fontawesome-solid-laptop:{ .lg .middle } __Client__
 
     ---
 
