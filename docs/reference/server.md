@@ -5,4 +5,4 @@ See sources on [github](https://github.com/cmolinier-phd/federated-learning-atta
 
 ----
 
-::: federated_learning_attack_framework.client
+::: federated_learning_attack_framework.server
