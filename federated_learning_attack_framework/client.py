@@ -89,7 +89,7 @@ def client_fn(context: Context) -> FlowerClient:
             context: node context for configuration
 
         Returns:
-            The instance of Flower client configured with by the given context.
+            The instance of FlowerClient configured with the given context.
         """
     # Create a new model
     net = Net()
