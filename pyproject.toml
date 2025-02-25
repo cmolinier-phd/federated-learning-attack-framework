@@ -14,8 +14,8 @@ dependencies = [
     "torchvision==0.17.1",
     "numpy<2.0",
     "mkdocs==1.6.1",
-    "sphinx",
-    "sphinx-material==0.0.36",
+    "mkdocstrings==0.28.1",
+    "mkdocs-material==9.6.5",
 ]
 
 [tool.hatch.build.targets.wheel]
