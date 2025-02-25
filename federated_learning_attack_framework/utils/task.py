@@ -81,7 +81,7 @@ class Net(nn.Module):
         return self.fc3(x)
 
 
-def train(net: Net, trainloader: DataLoader, epochs: int, device: torch.device) -> float:
+def train(net: nn.Module, trainloader: DataLoader, epochs: int, device: torch.device) -> float:
     """Train the model on the training set.
 
     Training loop :
@@ -137,7 +137,7 @@ def train(net: Net, trainloader: DataLoader, epochs: int, device: torch.device) 
     return avg_trainloss
 
 
-def test(net: Net, testloader: DataLoader, device: torch.device) -> tuple[float, float]:
+def test(net: nn.Module, testloader: DataLoader, device: torch.device) -> tuple[float, float]:
     """Test the model on the test set with a single forward pass.
     
     Args:
@@ -176,7 +176,7 @@ def test(net: Net, testloader: DataLoader, device: torch.device) -> tuple[float,
     return loss, accuracy
 
 
-def get_weights(net: Net) -> list[float]:
+def get_weights(net: nn.Module) -> list[float]:
     """Get weights from model.
     
     Args:
@@ -188,7 +188,7 @@ def get_weights(net: Net) -> list[float]:
     return [val.cpu().numpy() for _, val in net.state_dict().items()]
 
 
-def set_weights(net: Net, parameters: list[float]) -> None:
+def set_weights(net: nn.Module, parameters: list[float]) -> None:
     """Set mode weights from param list.
     
     Args:
