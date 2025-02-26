@@ -16,7 +16,7 @@
 
     ---
 
-    Server and aggreagtion implementation. 
+    Server and aggregation implementation. 
 
     [:octicons-arrow-right-24: see reference](./server.md)
 

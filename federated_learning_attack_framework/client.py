@@ -65,14 +65,14 @@ class FlowerClient(NumPyClient):
         )
 
     def evaluate(self, parameters: list[float], config: dict[str, Scalar]) -> tuple[list[float], int, dict[str, Scalar]]:
-        """ Test the recieved model on local data.
+        """ Test the received model on local data.
 
         Args:
             parameters: the current global model
-            config: parameters allownig the server to influence local evaluation process
+            config: parameters allowing the server to influence local evaluation process
 
         Returns:
-            The measured loss, the size of evaluation data and a dictionnary of metrics
+            The measured loss, the size of evaluation data and a dictionary of metrics
         """
         set_weights(self.net, parameters)
         loss, accuracy = test(self.net, self.valloader, self.device)
@@ -95,7 +95,7 @@ def client_fn(context: Context) -> FlowerClient:
     net = Net()
 
     # Get parameters from context
-    partition_id = context.node_config["partition-id"]
+    partition_id = context.node_config["id"]
     num_partitions = context.node_config["num-partitions"]
     local_epochs = context.run_config["local-epochs"]
     

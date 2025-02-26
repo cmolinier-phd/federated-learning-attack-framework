@@ -1,4 +1,4 @@
-#federated-learning-attack-framework/client.py
+#federated-learning-attack-framework/server.py
 
 """Provide server app.
 

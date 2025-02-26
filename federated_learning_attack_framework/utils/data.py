@@ -1,6 +1,6 @@
 #federated-learning-attack-framework/utils/data.py
 
-"""Provide data partitionning.
+"""Provide data partitioning.
 
 This module allows the user to partition data and get a partition.
 
