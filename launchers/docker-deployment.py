@@ -3,6 +3,15 @@
 """Provide deployment in docker.
 
 This module allows the user to start the federated learning in production mode with docker.
+
+The launcher can be run with the command
+
+`python launchers/docker-deployment.py`
+
+Args:
+    --n_clients: The number of clients to run. By default, 2 clients will be run. Can be abbreviate with -nc
+    --build: Flag to build the images. By default,the images are not build. Can be abbreviate with -b
+    --keep: Flag to indicate if the script should remove the container and network after run or not. By default, 2 clients will be run. Can be abbreviate with -k
 """
 
 import argparse
@@ -18,7 +27,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     
     # Parameters
-    parser.add_argument('-nc', '--num_clients', type=int, default=2, help="Number of clients in the federation")
+    parser.add_argument('-nc', '--n_clients', type=int, default=2, help="Number of clients in the federation")
 
     # Flags
     parser.add_argument('-b', "--build", action="store_true", help="Build images")
@@ -123,7 +132,7 @@ if __name__ == "__main__":
     ])
     
     # Launch clients
-    run_clients(opt.num_clients)
+    run_clients(opt.n_clients)
 
     # Launch server
     subprocess.run([
@@ -142,4 +151,4 @@ if __name__ == "__main__":
 
     # Cleaning
     if not opt.keep :
-        clean(opt.num_clients)
+        clean(opt.n_clients)

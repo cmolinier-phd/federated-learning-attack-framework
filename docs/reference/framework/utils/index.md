@@ -4,7 +4,7 @@
 
 <div class="grid cards" markdown>
 
--   :fontawesome-solid-server:{ .lg .middle } __Task__
+-   :fontawesome-solid-hexagon-nodes:{ .lg .middle } __Task__
 
     ---
 
@@ -12,11 +12,11 @@
 
     [:octicons-arrow-right-24: see reference](./task.md)
 
--   :fontawesome-solid-server:{ .lg .middle } __Data__
+-   :fontawesome-solid-table:{ .lg .middle } __Data__
 
     ---
 
-    Data partitionning and loading. 
+    Data partitioning and loading. 
 
     [:octicons-arrow-right-24: see reference](./data.md)
 
