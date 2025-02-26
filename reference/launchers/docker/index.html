@@ -824,6 +824,68 @@
 
         <p>Provide deployment in docker.</p>
 <p>This module allows the user to start the federated learning in production mode with docker.</p>
+<p>The launcher can be run with the command</p>
+<p><code>python launchers/docker-deployment.py</code></p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>--n_clients</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The number of clients to run. By default, 2 clients will be run. Can be abbreviate with -nc</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>--build</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Flag to build the images. By default,the images are not build. Can be abbreviate with -b</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+          <tr class="doc-section-item">
+            <td>
+                <code>--keep</code>
+            </td>
+            <td>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Flag to indicate if the script should remove the container and network after run or not. By default, 2 clients will be run. Can be abbreviate with -k</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
 
 
