@@ -589,6 +589,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#federated_learning_attack_framework.client.DummyAttacker" class="md-nav__link">
+    <span class="md-ellipsis">
+      DummyAttacker
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#federated_learning_attack_framework.client.client_fn" class="md-nav__link">
     <span class="md-ellipsis">
       client_fn
@@ -799,6 +808,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#federated_learning_attack_framework.client.DummyAttacker" class="md-nav__link">
+    <span class="md-ellipsis">
+      DummyAttacker
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#federated_learning_attack_framework.client.client_fn" class="md-nav__link">
     <span class="md-ellipsis">
       client_fn
@@ -877,9 +895,9 @@
 
 
         <p>Simple client from NumpyClient class</p>
-<p>For each round where the client is triggered, it will follow tese steps:</p>
+<p>For each round where the client is triggered, it will follow these steps:</p>
 <ol>
-<li>Replace its model with the recieived weights</li>
+<li>Replace its model with the received weights</li>
 <li>Train the model on its data</li>
 <li>Return back the new local weights, the training data loader length and the training loss</li>
 </ol>
@@ -915,7 +933,7 @@
 
     <div class="doc doc-contents ">
 
-        <p>Train the recieved model on local data.</p>
+        <p>Train the received model on local data.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -954,7 +972,7 @@
             </td>
             <td>
               <div class="doc-md-description">
-                <p>parameters allownig the server to influence local training process</p>
+                <p>parameters allowing the server to influence local training process</p>
               </div>
             </td>
             <td>
@@ -980,7 +998,7 @@
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The trained local weights, the size of training data and a dictionnary of metrics</p>
+                <p>The trained local weights, the size of training data and a dictionary of metrics</p>
               </div>
             </td>
           </tr>
@@ -1088,6 +1106,51 @@
 
 </div>
 
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="federated_learning_attack_framework.client.DummyAttacker" class="doc doc-heading">
+            <span class="doc doc-object-name doc-class-name">DummyAttacker</span>
+
+
+</h2>
+
+
+    <div class="doc doc-contents ">
+            <p class="doc doc-class-bases">
+              Bases: <code><a class="autorefs autorefs-internal" title="federated_learning_attack_framework.client.FlowerClient" href="#federated_learning_attack_framework.client.FlowerClient">FlowerClient</a></code></p>
+
+
+        <p>Simple attacker from NumpyClient class</p>
+<p>For each round where the attacker is triggered, it will behaves the same as a benign client (no attack)</p>
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+</div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1105,6 +1168,7 @@
         <p>Instantiate FlowerClient instances.</p>
 <p>This function will be triggered at each round since Flower clients are stateless.
 See how to build stateful clients at <a href="https://flower.ai/docs/framework/how-to-design-stateful-clients.html">https://flower.ai/docs/framework/how-to-design-stateful-clients.html</a></p>
+<p>To setup the adversaries, this function will use the run config parameter <code>n_attackers</code> and will instantiate all clients with id under num_attackers as attackers</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
