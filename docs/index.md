@@ -4,4 +4,4 @@ This site contains the project documentation for the `PredaFL` project which is 
 
 ## Table Of Contents
 
-1. [Reference](reference/federated-learning-attack-framework.md)
+1. [Reference](reference/index.md)
