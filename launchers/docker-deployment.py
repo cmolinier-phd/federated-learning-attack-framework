@@ -8,10 +8,10 @@ The launcher can be run with the command
 
 `python launchers/docker-deployment.py`
 
-Args:
-    --n_clients: The number of clients to run. By default, 2 clients will be run. Can be abbreviate with -nc
-    --build: Flag to build the images. By default,the images are not build. Can be abbreviate with -b
-    --keep: Flag to indicate if the script should remove the container and network after run or not. By default, 2 clients will be run. Can be abbreviate with -k
+Attributes:
+    --n_clients (int): The number of clients to run, can be abbreviate with -nc. Defaults to 2
+    --build (boolean): Flag to build the images, can be abbreviate with -b. Defaults to False
+    --keep (boolean): Flag to indicate if the script should remove the container and network after run or not, can be abbreviate with -k. Defaults to False. 
 """
 
 import argparse
