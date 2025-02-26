@@ -4,6 +4,7 @@
 
 This module allows the user to start the federated learning in production mode with docker.
 """
+
 import argparse
 import subprocess
 
@@ -21,7 +22,7 @@ def parse_args() -> argparse.Namespace:
 
     # Flags
     parser.add_argument('-b', "--build", action="store_true", help="Build images")
-    parser.add_argument('-k', "--keep", action="store_true", help="Keep docker containers and netwrok after run")
+    parser.add_argument('-k', "--keep", action="store_true", help="Keep docker containers and network after run")
 
     return parser.parse_args()
 

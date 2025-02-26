@@ -49,10 +49,15 @@ plugins:
 nav:
   - PredaFL Docs: index.md
   - Reference:
-    - federated learning attack framework: reference/federated-learning-attack-framework.md
-    - Utils:
-      - reference/utils/index.md
-      - Task: reference/utils/task.md
-      - Data: reference/utils/data.md
-    - Client app: reference/client.md
-    - Server app: reference/server.md
+    - reference/index.md
+    - Federated learning attack framework: 
+      - reference/framework/index.md
+      - Utils:
+        - reference/framework/utils/index.md
+        - Task: reference/framework/utils/task.md
+        - Data: reference/framework/utils/data.md
+      - Client app: reference/framework/client.md
+      - Server app: reference/framework/server.md
+    - Launchers:
+      - reference/launchers/index.md
+      - Docker: reference/launchers/docker.md

@@ -87,13 +87,13 @@ def train(net: nn.Module, trainloader: DataLoader, epochs: int, device: torch.de
     Training loop :
 
         1. Get images and labels from batch
-        2. Compute model ouptut on image batch
+        2. Compute model output on image batch
         3. Compute output loss with label
-        4. Make backpropagation and optimizer step
+        4. Make back propagation and optimizer step
 
     Fixed parameters :
 
-        - Optimizer: Amad, lr=0.01
+        - Optimizer: Adam, lr=0.01
         - Loss : CrossEntropyLoss
     
     Args:
@@ -192,7 +192,7 @@ def set_weights(net: nn.Module, parameters: list[float]) -> None:
     """Set mode weights from param list.
     
     Args:
-        net: The model which we want to set the wieghts
+        net: The model which we want to set the weights
         parameters: The new state dict in a list
     """
     # Bind keys and values
