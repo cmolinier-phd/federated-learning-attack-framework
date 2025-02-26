@@ -95,7 +95,7 @@ def client_fn(context: Context) -> FlowerClient:
     net = Net()
 
     # Get parameters from context
-    partition_id = context.node_config["partition-id"]
+    partition_id = context.node_config["id"]
     num_partitions = context.node_config["num-partitions"]
     local_epochs = context.run_config["local-epochs"]
     

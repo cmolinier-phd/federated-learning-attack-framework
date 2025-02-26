@@ -99,8 +99,8 @@ def train(net: nn.Module, trainloader: DataLoader, epochs: int, device: torch.de
     Args:
         net: The model to train
         trainloader: The dataloader to train the model on
-        epochs : The number of training epochs
-        device : The device to use (cpu or cuda)
+        epochs: The number of training epochs
+        device: The device to use (cpu or cuda)
 
     Returns:
         The average loss during the training.
@@ -143,7 +143,7 @@ def test(net: nn.Module, testloader: DataLoader, device: torch.device) -> tuple[
     Args:
         net: The model to test
         testloader: The dataloader to test the model on
-        device : The device to use 
+        device: The device to use 
 
     Returns:
         The loss and the accuracy on the test dataloader.
