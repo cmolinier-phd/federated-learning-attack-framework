@@ -22,13 +22,12 @@ from federated_learning_attack_framework.utils.task import Net, get_weights, set
 from federated_learning_attack_framework.utils.data import load_data
 
 
-# Define Flower Client and client_fn
 class FlowerClient(NumPyClient):
     """Simple client from NumpyClient class
 
-    For each round where the client is triggered, it will follow tese steps:
+    For each round where the client is triggered, it will follow these steps:
 
-    1. Replace its model with the recieived weights
+    1. Replace its model with the received weights
     2. Train the model on its data
     3. Return back the new local weights, the training data loader length and the training loss
     """
@@ -42,14 +41,14 @@ class FlowerClient(NumPyClient):
         self.net.to(self.device)
 
     def fit(self, parameters: list[float], config: dict[str, Scalar]) -> tuple[list[float], int, dict[str, Scalar]]:
-        """ Train the recieved model on local data.
+        """ Train the received model on local data.
 
         Args:
             parameters: the current global model
-            config: parameters allownig the server to influence local training process
+            config: parameters allowing the server to influence local training process
 
         Returns:
-            The trained local weights, the size of training data and a dictionnary of metrics
+            The trained local weights, the size of training data and a dictionary of metrics
         """
         set_weights(self.net, parameters)
         train_loss = train(
@@ -79,11 +78,28 @@ class FlowerClient(NumPyClient):
         return loss, len(self.valloader.dataset), {"accuracy": accuracy}
 
 
+class DummyAttacker(FlowerClient):
+    """Simple attacker from NumpyClient class
+
+    For each round where the attacker is triggered, it will behaves the same as a benign client (no attack)
+    """
+    def __init__(self, net, trainloader, valloader, local_epochs):
+        super().__init__(net, trainloader, valloader, local_epochs)
+
+    def fit(self, parameters: list[float], config: dict[str, Scalar]) -> tuple[list[float], int, dict[str, Scalar]]:
+        return super().fit(parameters, config)
+    
+    def evaluate(self, parameters: list[float], config: dict[str, Scalar]) -> tuple[list[float], int, dict[str, Scalar]]:
+        return super().evaluate(parameters, config)
+    
+    
 def client_fn(context: Context) -> FlowerClient:
     """ Instantiate FlowerClient instances.
 
         This function will be triggered at each round since Flower clients are stateless.
         See how to build stateful clients at <https://flower.ai/docs/framework/how-to-design-stateful-clients.html>
+
+        To setup the adversaries, this function will use the run config parameter `n_attackers` and will instantiate all clients with id under num_attackers as attackers
 
         Args:
             context: node context for configuration
@@ -95,15 +111,15 @@ def client_fn(context: Context) -> FlowerClient:
     net = Net()
 
     # Get parameters from context
-    partition_id = context.node_config["id"]
+    id = context.node_config["id"]
     num_partitions = context.node_config["num-partitions"]
     local_epochs = context.run_config["local-epochs"]
     
     # load data
-    trainloader, valloader = load_data(partition_id, num_partitions)
+    trainloader, valloader = load_data(id, num_partitions)
 
     # Return Client instance
-    return FlowerClient(net, trainloader, valloader, local_epochs).to_client()
+    return FlowerClient(net, trainloader, valloader, local_epochs).to_client() if id > context.run_config["n_attackers"] else DummyAttacker(net, trainloader, valloader, local_epochs).to_client()
 
 
 # Flower ClientApp

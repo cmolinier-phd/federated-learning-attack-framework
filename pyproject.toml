@@ -32,6 +32,7 @@ clientapp = "federated_learning_attack_framework.client:app"
 num-server-rounds = 3
 fraction-fit = 0.5
 local-epochs = 1
+n_attackers=2
 
 [tool.flwr.federations]
 default = "local-simulation"
