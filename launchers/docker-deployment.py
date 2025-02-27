@@ -9,9 +9,9 @@ The launcher can be run with the command
 `python launchers/docker-deployment.py`
 
 Attributes:
-    --n_clients (int): The number of clients to run, can be abbreviate with -nc. Defaults to 2
-    --build (boolean): Flag to build the images, can be abbreviate with -b. Defaults to False
-    --keep (boolean): Flag to indicate if the script should remove the container and network after run or not, can be abbreviate with -k. Defaults to False. 
+    --n_clients (int): The number of clients to run .Can be abbreviate with -nc. Defaults to 2
+    --build (str): Image(s) to build the images, "client" will build only client app, "server" only the server app and "all" both images. Can be abbreviate with -b. Defaults to ""
+    --keep (boolean): Flag to indicate if the script should remove the container and network after run or not. Can be abbreviate with -k. Defaults to False. 
 """
 
 import argparse
@@ -28,23 +28,45 @@ def parse_args() -> argparse.Namespace:
     
     # Parameters
     parser.add_argument('-nc', '--n_clients', type=int, default=2, help="Number of clients in the federation")
+    parser.add_argument('-b', "--build", type=str, default="", help='Build images "client" for client image, "server" for server image "all" for both')
 
     # Flags
-    parser.add_argument('-b', "--build", action="store_true", help="Build images")
     parser.add_argument('-k', "--keep", action="store_true", help="Keep docker containers and network after run")
 
     return parser.parse_args()
 
 
-def build_images() -> None:
-    """Build server and client images"""
-    # Remove old images
-    subprocess.run(['sudo', 'docker', 'image', 'rm', 'flwr_serverapp:0.0.1'])
+def build_client_image() -> None:
+    """Remove oldest client image and build new one."""
     subprocess.run(['sudo', 'docker', 'image', 'rm', 'flwr_clientapp:0.0.1'])
-    
-    # Build new images
-    subprocess.run(['sudo', 'docker', 'build', '-f', 'serverapp.Dockerfile', '-t', 'flwr_serverapp:0.0.1', '.'])
     subprocess.run(['sudo', 'docker', 'build', '-f', 'clientapp.Dockerfile', '-t', 'flwr_clientapp:0.0.1', '.'])
+
+
+def build_server_image():
+    """Remove oldest server image and build new one."""
+    subprocess.run(['sudo', 'docker', 'image', 'rm', 'flwr_serverapp:0.0.1'])
+    subprocess.run(['sudo', 'docker', 'build', '-f', 'serverapp.Dockerfile', '-t', 'flwr_serverapp:0.0.1', '.'])
+
+
+def build_images(req: str) -> None:
+    """Build server and client images
+    
+    Args:
+        req: The given instructions for builds (`client`, `server`, `all`)
+    """
+    match req:
+        case "client":
+            build_client_image()
+
+        case "server":
+            build_server_image()
+        
+        case "all":
+            build_client_image()
+            build_server_image()
+        
+        case _:
+            raise KeyError(f'build flag should be "client", "server" or "all" and not {req}')   
 
 
 def run_clients(n_clients: int) -> None:
@@ -68,7 +90,7 @@ def run_clients(n_clients: int) -> None:
             '--superlink', 'superlink:9092',
             '--clientappio-api-address', f'0.0.0.0:{port}',
             '--isolation', 'process',
-            '--node-config', f'id={i} num-partitions={n_clients}'
+            '--node-config', f'partition-id={i} num-partitions={n_clients}'
         ])
 
         subprocess.run([
@@ -116,8 +138,8 @@ if __name__ == "__main__":
     subprocess.run(['sudo', 'docker', 'network', 'create', '--driver', 'bridge', 'flwr-network'])
 
     # Build if required
-    if opt.build :
-        build_images()
+    if opt.build != "":
+        build_images(opt.build)
 
     # Run supernode
     subprocess.run([
