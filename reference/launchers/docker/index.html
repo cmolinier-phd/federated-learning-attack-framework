@@ -672,6 +672,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#launchers.docker-deployment.build_client_image" class="md-nav__link">
+    <span class="md-ellipsis">
+      build_client_image
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launchers.docker-deployment.build_server_image" class="md-nav__link">
+    <span class="md-ellipsis">
+      build_server_image
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#launchers.docker-deployment.build_images" class="md-nav__link">
     <span class="md-ellipsis">
       build_images
@@ -767,6 +785,24 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#launchers.docker-deployment.build_client_image" class="md-nav__link">
+    <span class="md-ellipsis">
+      build_client_image
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#launchers.docker-deployment.build_server_image" class="md-nav__link">
+    <span class="md-ellipsis">
+      build_server_image
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#launchers.docker-deployment.build_images" class="md-nav__link">
     <span class="md-ellipsis">
       build_images
@@ -845,18 +881,18 @@
             </td>
             <td>
               <div class="doc-md-description">
-                <p>The number of clients to run, can be abbreviate with -nc. Defaults to 2</p>
+                <p>The number of clients to run .Can be abbreviate with -nc. Defaults to 2</p>
               </div>
             </td>
           </tr>
           <tr class="doc-section-item">
             <td><code><span title="launchers.docker-deployment.--build">--build</span></code></td>
             <td>
-                  <code>boolean</code>
+                  <code>str</code>
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Flag to build the images, can be abbreviate with -b. Defaults to False</p>
+                <p>Image(s) to build the images, "client" will build only client app, "server" only the server app and "all" both images. Can be abbreviate with -b. Defaults to ""</p>
               </div>
             </td>
           </tr>
@@ -867,7 +903,7 @@
             </td>
             <td>
               <div class="doc-md-description">
-                <p>Flag to indicate if the script should remove the container and network after run or not, can be abbreviate with -k. Defaults to False.</p>
+                <p>Flag to indicate if the script should remove the container and network after run or not. Can be abbreviate with -k. Defaults to False.</p>
               </div>
             </td>
           </tr>
@@ -936,17 +972,86 @@
 <div class="doc doc-object doc-function">
 
 
+<h2 id="launchers.docker-deployment.build_client_image" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">build_client_image</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">build_client_image</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Remove oldest client image and build new one.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h2 id="launchers.docker-deployment.build_server_image" class="doc doc-heading">
+            <span class="doc doc-object-name doc-function-name">build_server_image</span>
+
+
+</h2>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">build_server_image</span><span class="p">()</span>
+</code></pre></div>
+
+    <div class="doc doc-contents ">
+
+        <p>Remove oldest server image and build new one.</p>
+
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
 <h2 id="launchers.docker-deployment.build_images" class="doc doc-heading">
             <span class="doc doc-object-name doc-function-name">build_images</span>
 
 
 </h2>
-<div class="doc-signature highlight"><pre><span></span><code><span class="nf">build_images</span><span class="p">()</span>
+<div class="doc-signature highlight"><pre><span></span><code><span class="nf">build_images</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
 </code></pre></div>
 
     <div class="doc doc-contents ">
 
         <p>Build server and client images</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>req</code>
+            </td>
+            <td>
+                  <code>str</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The given instructions for builds (<code>client</code>, <code>server</code>, <code>all</code>)</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
 
     </div>
 
