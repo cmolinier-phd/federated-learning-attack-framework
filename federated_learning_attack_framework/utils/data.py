@@ -9,40 +9,91 @@ The module contains the following functions:
 - `load_data()` - Set the model state dict from a given list.
 """
 
-from torch.utils.data import DataLoader
+from random import randint
+
+import torch
+from torch.utils.data import Dataset, random_split
 
 from torchvision.transforms import Compose, Normalize, ToTensor
-
-from flwr_datasets import FederatedDataset
-from flwr_datasets.partitioner import IidPartitioner
+from torchvision.datasets import CIFAR10
 
 
-fds = None  # Cache FederatedDataset
+class CustomSubset(Dataset):
+    """
+    Custom subset that keep the original dataset arguments
+
+    Args:
+        dataset (Dataset): The dataset to host
+        indexes (list[int]): The indexes of the subset
+    """
+
+    def __init__(self, dataset, indexes):
+        self.dataset = dataset
+        self.indices = indexes
+        self.targets = [dataset.targets[i] for i in indexes]
+
+        # Copy attributes if exists
+        if hasattr(dataset, 'classes'):
+          self.classes = dataset.classes
+        if hasattr(dataset, 'transform'):
+          self.transform = dataset.transform
+        if hasattr(dataset, 'target_transform'):
+          self.target_transform = dataset.target_transform
+
+    def __len__(self):
+        return len(self.indices)
+
+    def __getitem__(self, idx):
+        original_idx = self.indices[idx]
+        img, label = self.dataset[original_idx]
+        return {'img': img, 'label': torch.tensor(label)}
+    
+
+def load_dataset() -> Dataset:
+    """Load dataset
+    
+    This function should be adapted for different learning task
+    """
+    transform = Compose([ToTensor(), Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+    return CIFAR10(root="./data", train=True, download=True, transform=transform)
 
 
-def load_data(partition_id: int, num_partitions: int):
-    """Load partition CIFAR10 data."""
-    # Only initialize `FederatedDataset` once
-    global fds
-    if fds is None:
-        partitioner = IidPartitioner(num_partitions=num_partitions)
-        fds = FederatedDataset(
-            dataset="uoft-cs/cifar10",
-            partitioners={"train": partitioner},
-        )
-    partition = fds.load_partition(partition_id)
-    # Divide data on each node: 80% train, 20% test
-    partition_train_test = partition.train_test_split(test_size=0.2, seed=42)
-    pytorch_transforms = Compose(
-        [ToTensor(), Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
-    )
 
-    def apply_transforms(batch):
-        """Apply transforms to the partition from FederatedDataset."""
-        batch["img"] = [pytorch_transforms(img) for img in batch["img"]]
-        return batch
+def get_partition(partition_ratio: float) -> list[int]:
+    """Get partition idx of a subset of the original dataset
+    
+    Args:
+        partition_ratio (float): the percentage of the dataset to keep for the partition.
 
-    partition_train_test = partition_train_test.with_transform(apply_transforms)
-    trainloader = DataLoader(partition_train_test["train"], batch_size=32, shuffle=True)
-    testloader = DataLoader(partition_train_test["test"], batch_size=32)
-    return trainloader, testloader
+    Returns:
+        A list with the indexes of the sampled subset.
+    """
+    l_dataset = len(load_dataset())
+    s = set()
+
+    while len(s) < partition_ratio*l_dataset :
+        s.add(randint(1, l_dataset-1))
+
+    return list(s)
+
+
+
+def load_data(partition_idx: list[int], test_size=0.2) -> CustomSubset:
+    """Load partition data sample with given indexes.
+    
+    Args:
+        partition_idx (list[int]): The indexes of the subset in the dataset
+        test_size (float): The percentage of test value for train/test split.
+
+    Returns:
+        A trainset and a testset sampled from the dataset with the given indexes
+    """
+    dataset = load_dataset()
+    subset = CustomSubset(dataset, partition_idx)
+    
+    test_size = int(test_size * len(subset))
+    train_size = len(subset) - test_size
+    
+    trainset, testset = random_split(subset, [train_size, test_size])
+    
+    return trainset, testset

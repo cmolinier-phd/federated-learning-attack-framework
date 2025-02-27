@@ -10,16 +10,18 @@ The module contains the following functions:
 - `client_fn(context)` - The function to instantiate clients.
 """
 
+from numpy.random import poisson
+
 import torch
 from torch import nn as nn
 from torch.utils.data import DataLoader
 
-from flwr.common import Context
+from flwr.common import Context, ConfigsRecord
 from flwr.common.typing import Scalar
 from flwr.client import ClientApp, NumPyClient
 
 from federated_learning_attack_framework.utils.task import Net, get_weights, set_weights, test, train
-from federated_learning_attack_framework.utils.data import load_data
+from federated_learning_attack_framework.utils.data import load_data, get_partition
 
 
 class FlowerClient(NumPyClient):
@@ -111,15 +113,22 @@ def client_fn(context: Context) -> FlowerClient:
     net = Net()
 
     # Get parameters from context
-    id = context.node_config["id"]
-    num_partitions = context.node_config["num-partitions"]
+    id = context.node_config["partition-id"]
     local_epochs = context.run_config["local-epochs"]
+
+    if "partition_config" not in context.state.configs_records:
+        partition_ratio = poisson(7)/28 # Obtained via an empirical study
+        context.state.configs_records["partition_config"] = ConfigsRecord()
+        context.state.configs_records["partition_config"]['partition_idx'] = get_partition(partition_ratio)
     
     # load data
-    trainloader, valloader = load_data(id, num_partitions)
+    trainset, testset = load_data(context.state.configs_records["partition_config"]['partition_idx'])
+
+    trainloader = DataLoader(trainset, batch_size=32, shuffle=True)
+    testloader = DataLoader(testset, batch_size=32)
 
     # Return Client instance
-    return FlowerClient(net, trainloader, valloader, local_epochs).to_client() if id > context.run_config["n_attackers"] else DummyAttacker(net, trainloader, valloader, local_epochs).to_client()
+    return FlowerClient(net, trainloader, testloader, local_epochs).to_client() if id > context.run_config["n_attackers"] else DummyAttacker(net, trainloader, testloader, local_epochs).to_client()
 
 
 # Flower ClientApp
